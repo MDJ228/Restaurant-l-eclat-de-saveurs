@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block titre %}Mon compte - {{ data.restaurant }}{% endblock %}
+{% block contenu %}
+<section class="bloc">
+    <h1 class="titre-page">Mon compte</h1>
+    <div class="deux-colonnes">
+        <form method="post" class="formulaire">
+            <p class="desc">Connecté avec {{ valeurs.email }}</p>
+            {% include "_profil.html" %}
+            <button class="btn" type="submit">Enregistrer</button>
+        </form>
+        <aside class="resume">
+            <h2>Mes commandes</h2>
+            {% for c in commandes %}
+            <p class="ligne-resume"><a href="{{ url_for('recu', ref=c.ref) }}">{{ c.ref }}</a><span>{{ "%.2f"|format(c.total) }} {{ c.devise }}</span></p>
+            {% else %}
+            <p class="desc">Vous n'avez pas encore passé de commande avec ce compte.</p>
+            {% endfor %}
+        </aside>
+    </div>
+</section>
+{% endblock %}

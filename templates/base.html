@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titre %}{{ data.restaurant }}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body{% if fond_url %} style="background-image: url('{{ url_for('static', filename=fond_url) }}')"{% endif %}>
+    <header>
+        <nav>
+            <a class="logo" href="{{ url_for('index') }}">
+                {% if logo_url %}<img src="{{ url_for('static', filename=logo_url) }}" alt="{{ data.restaurant }} - Accueil" width="150" height="50">{% else %}<span>{{ data.restaurant }}</span>{% endif %}
+            </a>
+            <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu"><i class="fa-solid fa-bars"></i></button>
+            <ul id="menu-nav">
+                <li><a href="{{ url_for('index') }}" class="{{ 'actif' if request.endpoint == 'index' }}"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                <li><a href="{{ url_for('menu') }}" class="{{ 'actif' if request.endpoint == 'menu' }}"><i class="fa-solid fa-utensils"></i> Menu</a></li>
+                <li><a href="{{ url_for('panier') }}" class="{{ 'actif' if request.endpoint in ('panier', 'commande') }}"><i class="fa-solid fa-cart-shopping"></i> Panier{% if nb_panier %} <span class="pastille">{{ nb_panier }}</span>{% endif %}</a></li>
+                <li><a href="{{ url_for('contact') }}" class="{{ 'actif' if request.endpoint == 'contact' }}"><i class="fa-solid fa-address-book"></i> Contact</a></li>
+                {% if utilisateur %}
+                <li><a href="{{ url_for('compte') }}" id="login"><i class="fa-solid fa-user"></i> {{ utilisateur.nom.split(' ')[0] }}</a></li>
+                <li><a href="{{ url_for('deconnexion') }}" id="register">Déconnexion</a></li>
+                {% else %}
+                <li><a href="{{ url_for('connexion') }}" id="login">Connexion</a></li>
+                <li><a href="{{ url_for('inscription') }}" id="register">Inscription</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flashs" role="status">
+        {% for categorie, message in messages %}
+        <div class="flash {{ categorie }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <main>{% block contenu %}{% endblock %}</main>
+
+    <footer class="pied">
+        <div class="pied-grille">
+            <div>
+                <h4>{{ data.restaurant }}</h4>
+                <p>{{ data.slogan }}. Sur place, à emporter ou livré chez vous.</p>
+                <div class="reseaux">
+                    <a href="{{ data.contact.reseaux.facebook }}" aria-label="Facebook" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="{{ data.contact.reseaux.instagram }}" aria-label="Instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="{{ data.contact.reseaux.whatsapp }}" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Accueil</a></li>
+                    <li><a href="{{ url_for('menu') }}">Menu</a></li>
+                    <li><a href="{{ url_for('panier') }}">Panier</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Nous trouver</h4>
+                <ul>
+                    <li><i class="fa-solid fa-location-dot"></i> {{ data.contact.adresse }}</li>
+                    <li><i class="fa-solid fa-phone"></i> {{ data.contact.telephone }}</li>
+                    <li><i class="fa-solid fa-envelope"></i> {{ data.contact.email }}</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Horaires</h4>
+                <ul>
+                    {% for h in data.contact.horaires %}
+                    <li><strong>{{ h.jours }}</strong><br>{{ h.heures }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="pied-bas">
+            <p>&copy; {{ annee }} {{ data.restaurant }}. Tous droits réservés.</p>
+            <p class="credit">Photos des plats : Pexels, TheMealDB et Wikipédia.</p>
+            <p><a href="{{ url_for('contact') }}">Mentions légales</a> <a href="{{ url_for('contact') }}">Nous contacter</a></p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

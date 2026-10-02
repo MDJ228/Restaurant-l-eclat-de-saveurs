@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block titre %}Connexion - {{ data.restaurant }}{% endblock %}
+{% block contenu %}
+<section class="bloc etroit">
+    <h1 class="titre-page">Connexion</h1>
+    <form method="post" class="formulaire">
+        <input type="hidden" name="next" value="{{ cible }}">
+        <div class="champs">
+            <label class="large">E-mail<input type="email" name="email" autocomplete="email" required></label>
+            <label class="large">Mot de passe<input type="password" name="mot_de_passe" autocomplete="current-password" required></label>
+        </div>
+        <button class="btn btn-large" type="submit">Se connecter</button>
+        <p class="desc">Pas encore de compte ? <a href="{{ url_for('inscription', next=cible) }}">Inscrivez-vous</a>. Vous pouvez aussi commander sans compte.</p>
+    </form>
+</section>
+{% endblock %}

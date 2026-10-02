@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block titre %}Reçu {{ c.ref }} - {{ data.restaurant }}{% endblock %}
+{% block contenu %}
+<section class="bloc">
+    <div class="recu" id="recu">
+        <div class="recu-entete">
+            <i class="fa-solid fa-circle-check"></i>
+            <h1>Commande confirmée</h1>
+            <p>Référence <strong>{{ c.ref }}</strong> - {{ c.date }}</p>
+        </div>
+        <dl class="recu-infos">
+            <div><dt>Client</dt><dd>{{ c.client.nom }}<br>{{ c.client.telephone }}{% if c.client.email %}<br>{{ c.client.email }}{% endif %}</dd></div>
+            <div><dt>Mode</dt><dd>{{ c.mode }}{% if c.adresse %}<br>{{ c.adresse }}{% endif %}{% if c.table %}<br>Table {{ c.table }}{% endif %}</dd></div>
+            <div><dt>Paiement</dt><dd>{{ c.paiement.moyen }}<br>{{ c.paiement.detail }}</dd></div>
+        </dl>
+        <table class="recu-table">
+            <thead><tr><th>Plat</th><th>Prix</th><th>Qté</th><th>Total</th></tr></thead>
+            <tbody>
+                {% for l in c.lignes %}
+                <tr><td>{{ l.nom }}</td><td>{{ "%.2f"|format(l.prix) }} {{ c.devise }}</td><td>{{ l.quantite }}</td><td>{{ "%.2f"|format(l.total) }} {{ c.devise }}</td></tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr><td colspan="3">Sous-total</td><td>{{ "%.2f"|format(c.sous_total) }} {{ c.devise }}</td></tr>
+                {% if c.frais %}<tr><td colspan="3">Livraison</td><td>{{ "%.2f"|format(c.frais) }} {{ c.devise }}</td></tr>{% endif %}
+                <tr class="gras"><td colspan="3">Total payé</td><td>{{ "%.2f"|format(c.total) }} {{ c.devise }}</td></tr>
+            </tfoot>
+        </table>
+        <div class="actions sans-impression">
+            <a class="btn" href="{{ url_for('recu_pdf', ref=c.ref) }}"><i class="fa-solid fa-download"></i> Télécharger le reçu (PDF)</a>
+            <button class="btn btn-clair" type="button" onclick="window.print()"><i class="fa-solid fa-print"></i> Imprimer</button>
+            <a class="btn btn-clair" href="{{ url_for('menu') }}">Retour au menu</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block titre %}Commande - {{ data.restaurant }}{% endblock %}
+{% block contenu %}
+<section class="bloc">
+    <h1 class="titre-page">Finaliser la commande</h1>
+    <div class="deux-colonnes">
+        <form method="post" id="form-commande" class="formulaire" data-sous-total="{{ sous_total }}" data-frais="{{ data.frais_livraison }}" data-devise="{{ data.devise }}" novalidate>
+            <fieldset>
+                <legend>1. Vos informations</legend>
+                {% if utilisateur %}
+                <p class="desc">Ces informations viennent de votre compte. Vous pouvez les modifier pour cette commande.</p>
+                {% else %}
+                <p class="desc">Vous commandez sans compte. <a href="{{ url_for('connexion', next=url_for('commande')) }}">Connectez-vous</a> ou <a href="{{ url_for('inscription', next=url_for('commande')) }}">créez un compte</a> pour gagner du temps la prochaine fois.</p>
+                {% endif %}
+                <div class="champs">
+                    <label>Nom complet<input type="text" name="nom" value="{{ valeurs.nom }}" autocomplete="name" required></label>
+                    <label>Téléphone<input type="tel" name="telephone" value="{{ valeurs.telephone }}" autocomplete="tel" required></label>
+                    <label class="large">E-mail (facultatif)<input type="email" name="email" value="{{ valeurs.email }}" autocomplete="email"></label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>2. Mode de commande</legend>
+                <div class="choix-groupe">
+                    <label class="choix"><input type="radio" name="mode" value="sur_place" {{ 'checked' if valeurs.mode != 'livraison' }}><span><i class="fa-solid fa-utensils"></i> Sur place</span></label>
+                    <label class="choix"><input type="radio" name="mode" value="livraison" {{ 'checked' if valeurs.mode == 'livraison' }}><span><i class="fa-solid fa-motorcycle"></i> Livraison</span></label>
+                </div>
+                <div class="champs" id="bloc-sur_place">
+                    <label class="large">Numéro de table (facultatif)<input type="text" name="table" value="{{ valeurs.table }}" placeholder="Si vous êtes déjà installé"></label>
+                </div>
+                <div class="champs" id="bloc-livraison" hidden>
+                    <label class="large">Adresse de livraison<input type="text" name="adresse" value="{{ valeurs.adresse }}" autocomplete="street-address" required></label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>3. Paiement</legend>
+                <div class="choix-groupe">
+                    <label class="choix"><input type="radio" name="paiement" value="mobile_money" {{ 'checked' if valeurs.paiement != 'carte' }}><span><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money</span></label>
+                    <label class="choix"><input type="radio" name="paiement" value="carte" {{ 'checked' if valeurs.paiement == 'carte' }}><span><i class="fa-solid fa-credit-card"></i> Carte bancaire</span></label>
+                </div>
+                <div class="champs" id="bloc-mobile_money">
+                    <label>Opérateur
+                        <select name="operateur" required>
+                            <option value="">Choisir</option>
+                            {% for o in data.operateurs_mobile_money %}<option value="{{ o }}" {{ 'selected' if valeurs.operateur == o }}>{{ o }}</option>{% endfor %}
+                        </select>
+                    </label>
+                    <label>Numéro Mobile Money<input type="tel" name="numero_mm" value="{{ valeurs.numero_mm }}" required></label>
+                    <p class="desc large">Une demande de confirmation sera envoyée sur ce numéro.</p>
+                </div>
+                <div class="champs" id="bloc-carte" hidden>
+                    <label class="large">Titulaire de la carte<input type="text" name="titulaire" value="{{ valeurs.titulaire }}" autocomplete="cc-name" required></label>
+                    <label class="large">Numéro de carte<input type="text" name="numero_carte" inputmode="numeric" maxlength="23" placeholder="1234 5678 9012 3456" autocomplete="cc-number" required></label>
+                    <label>Expiration<input type="text" name="expiration" maxlength="5" placeholder="MM/AA" autocomplete="cc-exp" required></label>
+                    <label>CVV<input type="password" name="cvv" inputmode="numeric" maxlength="4" autocomplete="cc-csc" required></label>
+                </div>
+            </fieldset>
+            <button class="btn btn-large" type="submit"><i class="fa-solid fa-lock"></i> Payer <span id="total-bouton">{{ "%.2f"|format(total) }} {{ data.devise }}</span></button>
+        </form>
+
+        <aside class="resume">
+            <h2>Votre commande</h2>
+            {% for l in lignes %}
+            <p class="ligne-resume"><span>{{ l.quantite }} x {{ l.plat.nom }}</span><span>{{ "%.2f"|format(l.total) }} {{ data.devise }}</span></p>
+            {% endfor %}
+            <p class="ligne-resume"><span>Sous-total</span><span>{{ "%.2f"|format(sous_total) }} {{ data.devise }}</span></p>
+            <p class="ligne-resume" id="ligne-frais" {{ 'hidden' if valeurs.mode != 'livraison' }}><span>Livraison</span><span>{{ "%.2f"|format(data.frais_livraison) }} {{ data.devise }}</span></p>
+            <p class="ligne-resume gras"><span>Total</span><span id="total-resume">{{ "%.2f"|format(total) }} {{ data.devise }}</span></p>
+            <a class="lien-bouton" href="{{ url_for('panier') }}">Modifier le panier</a>
+        </aside>
+    </div>
+</section>
+{% endblock %}

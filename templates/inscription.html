@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block titre %}Inscription - {{ data.restaurant }}{% endblock %}
+{% block contenu %}
+<section class="bloc etroit">
+    <h1 class="titre-page">Créer un compte</h1>
+    <form method="post" class="formulaire">
+        <input type="hidden" name="next" value="{{ cible }}">
+        <div class="champs">
+            <label class="large">E-mail<input type="email" name="email" value="{{ valeurs.email }}" autocomplete="email" required></label>
+            <label>Mot de passe<input type="password" name="mot_de_passe" autocomplete="new-password" minlength="6" required></label>
+            <label>Confirmation<input type="password" name="confirmation" autocomplete="new-password" required></label>
+        </div>
+        <p class="desc">Ces informations seront appliquées automatiquement à vos prochaines commandes. Les données de carte bancaire ne sont jamais enregistrées.</p>
+        {% include "_profil.html" %}
+        <button class="btn btn-large" type="submit">Créer mon compte</button>
+        <p class="desc">Déjà inscrit ? <a href="{{ url_for('connexion', next=cible) }}">Connectez-vous</a>.</p>
+    </form>
+</section>
+{% endblock %}

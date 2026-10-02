@@ -1,0 +1,18 @@
+<div class="champs">
+    <label class="large">Nom complet<input type="text" name="nom" value="{{ valeurs.nom }}" autocomplete="name" required></label>
+    <label>Téléphone<input type="tel" name="telephone" value="{{ valeurs.telephone }}" autocomplete="tel"></label>
+    <label>Adresse de livraison<input type="text" name="adresse" value="{{ valeurs.adresse }}" autocomplete="street-address"></label>
+    <label>Paiement préféré
+        <select name="paiement_prefere">
+            <option value="mobile_money" {{ 'selected' if valeurs.paiement_prefere != 'carte' }}>Mobile Money</option>
+            <option value="carte" {{ 'selected' if valeurs.paiement_prefere == 'carte' }}>Carte bancaire</option>
+        </select>
+    </label>
+    <label>Opérateur Mobile Money
+        <select name="operateur">
+            <option value="">Aucun</option>
+            {% for o in data.operateurs_mobile_money %}<option value="{{ o }}" {{ 'selected' if valeurs.operateur == o }}>{{ o }}</option>{% endfor %}
+        </select>
+    </label>
+    <label class="large">Numéro Mobile Money<input type="tel" name="numero_mm" value="{{ valeurs.numero_mm }}"></label>
+</div>

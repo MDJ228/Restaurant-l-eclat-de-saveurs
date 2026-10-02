@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "_carte.html" import carte with context %}
+{% block contenu %}
+<section class="accueil">
+    <div class="restaurant-card">
+        <img src="{{ url_for('static', filename=accueil_url or 'images/placeholder.svg') }}" alt="Intérieur chaleureux de {{ data.restaurant }}" class="restaurant-image">
+        <div class="restaurant-content">
+            <h1 class="restaurant-title">{{ data.restaurant }}</h1>
+            <p class="restaurant-description">
+                Situé au cœur de la ville, <strong>{{ data.restaurant }}</strong> vous accueille dans un cadre chaleureux et moderne. Notre chef vous propose une <strong>cuisine maison, fraîche et de saison</strong>, revisitant les grands classiques français. Profitez de notre terrasse ombragée pour un moment convivial.
+            </p>
+            <ul class="restaurant-info">
+                <li><strong>Cuisine :</strong> Bistronomique &amp; Traditionnelle</li>
+                <li><strong>Les + :</strong> Produits frais, terrasse, options végétariennes</li>
+                <li><strong>Commande :</strong> sur place ou livraison, paiement Mobile Money ou carte</li>
+            </ul>
+            <div class="actions">
+                <a class="btn" href="{{ url_for('menu') }}"><i class="fa-solid fa-utensils"></i> Voir le menu</a>
+                <a class="btn btn-clair" href="{{ url_for('contact') }}">Réserver ou nous écrire</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bloc">
+    <h2 class="titre-section">Plats populaires</h2>
+    <div class="menu-grid">
+        {% for plat in populaires %}{{ carte(plat) }}{% endfor %}
+    </div>
+    <p class="centre"><a class="btn btn-clair" href="{{ url_for('menu') }}">Toute la carte</a></p>
+</section>
+
+<section class="bloc atouts">
+    <div><i class="fa-solid fa-carrot"></i><h3>Produits frais</h3><p>Des ingrédients de saison, cuisinés chaque jour.</p></div>
+    <div><i class="fa-solid fa-motorcycle"></i><h3>Livraison rapide</h3><p>Votre commande livrée chaude à l'adresse de votre choix.</p></div>
+    <div><i class="fa-solid fa-mobile-screen-button"></i><h3>Paiement simple</h3><p>Mobile Money ou carte bancaire, avec reçu à télécharger.</p></div>
+</section>
+{% endblock %}

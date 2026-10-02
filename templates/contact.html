@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block titre %}Contact - {{ data.restaurant }}{% endblock %}
+{% block contenu %}
+<section class="bloc">
+    <h1 class="titre-page">Nous contacter</h1>
+    <div class="deux-colonnes">
+        <div class="infos-contact">
+            <div class="info"><i class="fa-solid fa-location-dot"></i><div><h3>Adresse</h3><p>{{ data.contact.adresse }}</p><a href="{{ carte }}" target="_blank" rel="noopener">Voir l'itinéraire</a></div></div>
+            <div class="info"><i class="fa-solid fa-phone"></i><div><h3>Téléphone</h3><p><a href="tel:{{ data.contact.telephone|replace(' ', '') }}">{{ data.contact.telephone }}</a></p></div></div>
+            <div class="info"><i class="fa-brands fa-whatsapp"></i><div><h3>WhatsApp</h3><p><a href="{{ data.contact.reseaux.whatsapp }}" target="_blank" rel="noopener">{{ data.contact.whatsapp }}</a></p></div></div>
+            <div class="info"><i class="fa-solid fa-envelope"></i><div><h3>E-mail</h3><p><a href="mailto:{{ data.contact.email }}">{{ data.contact.email }}</a></p></div></div>
+            <div class="info"><i class="fa-solid fa-clock"></i><div><h3>Horaires d'ouverture</h3>{% for h in data.contact.horaires %}<p><strong>{{ h.jours }}</strong> : {{ h.heures }}</p>{% endfor %}</div></div>
+            <div class="info"><i class="fa-solid fa-motorcycle"></i><div><h3>Livraison</h3><p>Livraison à domicile pendant les horaires d'ouverture, {{ "%.2f"|format(data.frais_livraison) }} {{ data.devise }} par commande.</p></div></div>
+        </div>
+        <form method="post" class="formulaire">
+            <h2>Envoyer un message</h2>
+            <div class="champs">
+                <label>Nom<input type="text" name="nom" value="{{ valeurs.nom }}" required></label>
+                <label>E-mail<input type="email" name="email" value="{{ valeurs.email }}" required></label>
+                <label class="large">Sujet<input type="text" name="sujet" value="{{ valeurs.sujet }}" placeholder="Réservation, question, événement privé"></label>
+                <label class="large">Message<textarea name="message" rows="6" required>{{ valeurs.message }}</textarea></label>
+            </div>
+            <button class="btn" type="submit"><i class="fa-solid fa-paper-plane"></i> Envoyer le message</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

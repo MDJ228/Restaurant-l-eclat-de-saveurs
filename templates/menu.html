@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "_carte.html" import ligne with context %}
+{% block titre %}Menu - {{ data.restaurant }}{% endblock %}
+{% block contenu %}
+<section class="bloc">
+    <h1 class="titre-page">Notre carte</h1>
+    <div class="filtres">
+        <button type="button" class="filtre actif" data-cat="tout">Tout</button>
+        {% for cat in data.categories %}
+        <button type="button" class="filtre" data-cat="{{ cat.id }}"><i class="fa-solid {{ cat.icone }}"></i> {{ cat.titre }}</button>
+        {% endfor %}
+    </div>
+    {% for cat in data.categories %}
+    <div class="categorie-bloc" data-cat="{{ cat.id }}">
+        <h2 class="titre-section"><i class="fa-solid {{ cat.icone }}"></i> {{ cat.titre }}</h2>
+        <div class="carte-liste">
+            {% for plat in data.menu if plat.categorie == cat.cle %}{{ ligne(plat) }}{% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}

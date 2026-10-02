@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% from "_carte.html" import image with context %}
+{% block titre %}Panier - {{ data.restaurant }}{% endblock %}
+{% block contenu %}
+<section class="bloc">
+    <h1 class="titre-page">Votre panier</h1>
+    {% if not lignes %}
+    <div class="vide">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <p>Votre panier est vide. Parcourez la carte et ajoutez vos plats préférés.</p>
+        <a class="btn" href="{{ url_for('menu') }}">Voir le menu</a>
+    </div>
+    {% else %}
+    <div class="deux-colonnes">
+        <div class="liste-panier">
+            {% for l in lignes %}
+            <article class="ligne-panier">
+                {{ image(l.plat) }}
+                <div class="ligne-info">
+                    <h3>{{ l.plat.nom }}</h3>
+                    <span class="desc">{{ "%.2f"|format(l.plat.prix) }} {{ data.devise }} l'unité</span>
+                </div>
+                <form method="post" action="{{ url_for('modifier', plat_id=l.plat.id) }}" class="quantite">
+                    <button name="action" value="moins" aria-label="Retirer un {{ l.plat.nom }}"><i class="fa-solid fa-minus"></i></button>
+                    <span>{{ l.quantite }}</span>
+                    <button name="action" value="plus" aria-label="Ajouter un {{ l.plat.nom }}"><i class="fa-solid fa-plus"></i></button>
+                </form>
+                <span class="prix total-ligne">{{ "%.2f"|format(l.total) }} {{ data.devise }}</span>
+                <form method="post" action="{{ url_for('supprimer', plat_id=l.plat.id) }}">
+                    <button class="supprimer" aria-label="Supprimer {{ l.plat.nom }}"><i class="fa-solid fa-trash-can"></i></button>
+                </form>
+            </article>
+            {% endfor %}
+            <form method="post" action="{{ url_for('vider') }}"><button class="lien-bouton">Vider le panier</button></form>
+        </div>
+        <aside class="resume">
+            <h2>Récapitulatif</h2>
+            <p class="ligne-resume"><span>Sous-total</span><span>{{ "%.2f"|format(sous_total) }} {{ data.devise }}</span></p>
+            <p class="ligne-resume desc"><span>Livraison</span><span>{{ "%.2f"|format(data.frais_livraison) }} {{ data.devise }} (si livraison)</span></p>
+            <a class="btn btn-large" href="{{ url_for('commande') }}"><i class="fa-solid fa-credit-card"></i> Passer la commande</a>
+            {% if not utilisateur %}
+            <p class="desc">Pas besoin de compte pour commander. <a href="{{ url_for('connexion', next=url_for('commande')) }}">Connectez-vous</a> pour remplir vos informations automatiquement.</p>
+            {% endif %}
+        </aside>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

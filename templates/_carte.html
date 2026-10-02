@@ -1,0 +1,40 @@
+{% macro image(plat) %}<img src="{{ plat.image_url }}" alt="{{ plat.nom }}" loading="lazy" onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/placeholder.svg') }}'">{% endmacro %}
+
+{% macro bouton(plat) %}
+<form method="post" action="{{ url_for('ajouter', plat_id=plat.id) }}">
+    <input type="hidden" name="next" value="{{ request.path }}#plat-{{ plat.id }}">
+    <button class="btn btn-petit" type="submit"><i class="fa-solid fa-cart-plus"></i> Ajouter</button>
+</form>
+{% endmacro %}
+
+{% macro carte(plat) %}
+<article class="card" id="plat-{{ plat.id }}">
+    <div class="card-img">
+        {{ image(plat) }}
+        {% if plat.vegetarien %}<span class="badge"><i class="fa-solid fa-leaf"></i> Végétarien</span>{% endif %}
+    </div>
+    <div class="card-corps">
+        <h3>{{ plat.nom }}</h3>
+        <p class="desc">{{ plat.description }}</p>
+        <div class="card-bas">
+            <span class="prix">{{ "%.2f"|format(plat.prix) }} {{ data.devise }}</span>
+            {{ bouton(plat) }}
+        </div>
+    </div>
+</article>
+{% endmacro %}
+
+{% macro ligne(plat) %}
+<article class="ligne-plat" id="plat-{{ plat.id }}">
+    {{ image(plat) }}
+    <div class="ligne-texte">
+        <div class="ligne-titre">
+            <h3>{{ plat.nom }}{% if plat.vegetarien %} <i class="fa-solid fa-leaf vegetal" title="Végétarien"></i>{% endif %}</h3>
+            <span class="pointilles"></span>
+            <span class="prix">{{ "%.2f"|format(plat.prix) }} {{ data.devise }}</span>
+        </div>
+        <p class="desc">{{ plat.description }}</p>
+    </div>
+    {{ bouton(plat) }}
+</article>
+{% endmacro %}

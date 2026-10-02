@@ -1,0 +1,382 @@
+{
+  "restaurant": "L'Éclat de Saveurs",
+  "slogan": "Cuisine maison, fraîche et de saison",
+  "devise": "€",
+  "frais_livraison": 3.0,
+  "operateurs_mobile_money": [
+    "Orange Money",
+    "MTN Mobile Money",
+    "Moov Money",
+    "Wave"
+  ],
+  "contact": {
+    "adresse": "12 Place du Marché, 75000 Ville",
+    "telephone": "+33 1 23 45 67 89",
+    "whatsapp": "+33 6 12 34 56 78",
+    "email": "contact@eclat-de-saveurs.fr",
+    "horaires": [
+      {
+        "jours": "Lundi - Jeudi",
+        "heures": "11h30 - 14h30 et 18h30 - 22h00"
+      },
+      {
+        "jours": "Vendredi - Samedi",
+        "heures": "11h30 - 14h30 et 18h30 - 23h00"
+      },
+      {
+        "jours": "Dimanche",
+        "heures": "11h30 - 15h00"
+      }
+    ],
+    "reseaux": {
+      "facebook": "https://www.facebook.com/",
+      "instagram": "https://www.instagram.com/",
+      "whatsapp": "https://wa.me/33612345678"
+    }
+  },
+  "categories": [
+    {
+      "cle": "Entrée",
+      "titre": "Nos Entrées",
+      "id": "entrees",
+      "icone": "fa-bowl-food"
+    },
+    {
+      "cle": "Plat",
+      "titre": "Nos Plats",
+      "id": "plats",
+      "icone": "fa-utensils"
+    },
+    {
+      "cle": "Dessert",
+      "titre": "Nos Desserts",
+      "id": "desserts",
+      "icone": "fa-cake-candles"
+    },
+    {
+      "cle": "Boisson",
+      "titre": "Nos Boissons",
+      "id": "boissons",
+      "icone": "fa-wine-glass"
+    }
+  ],
+  "menu": [
+    {
+      "id": 1,
+      "nom": "Velouté de potimarron",
+      "prix": 14.5,
+      "categorie": "Entrée",
+      "image": "images/image1.jpg",
+      "description": "Crème de potimarron, éclats de châtaigne et huile de noisette.",
+      "vegetarien": true,
+      "populaire": true,
+      "recherche": "pumpkin soup"
+    },
+    {
+      "id": 2,
+      "nom": "Tartare de saumon",
+      "prix": 16.0,
+      "categorie": "Entrée",
+      "image": "images/image2.jpg",
+      "description": "Saumon frais mariné à l'aneth, avocat et citron vert.",
+      "populaire": true,
+      "recherche": "salmon tartare"
+    },
+    {
+      "id": 3,
+      "nom": "Bœuf bourguignon",
+      "prix": 28.5,
+      "categorie": "Plat",
+      "image": "images/image3.jpg",
+      "description": "Mijoté lentement au vin rouge, carottes fondantes et pommes vapeur.",
+      "populaire": true,
+      "recherche": "beef bourguignon"
+    },
+    {
+      "id": 4,
+      "nom": "Saint-Jacques snackées",
+      "prix": 32.0,
+      "categorie": "Plat",
+      "image": "images/image4.jpg",
+      "description": "Noix de Saint-Jacques dorées, purée de panais et beurre blanc.",
+      "populaire": true,
+      "recherche": "seared scallops"
+    },
+    {
+      "id": 5,
+      "nom": "Risotto aux champignons",
+      "prix": 24.0,
+      "categorie": "Plat",
+      "image": "images/image5.jpg",
+      "description": "Riz crémeux, champignons des bois et copeaux de parmesan.",
+      "vegetarien": true,
+      "recherche": "mushroom risotto"
+    },
+    {
+      "id": 6,
+      "nom": "Soufflé au chocolat",
+      "prix": 12.5,
+      "categorie": "Dessert",
+      "image": "images/image6.jpg",
+      "description": "Soufflé minute au chocolat noir, crème anglaise tiède.",
+      "vegetarien": true,
+      "populaire": true,
+      "recherche": "chocolate souffle"
+    },
+    {
+      "id": 7,
+      "nom": "Tarte aux pommes",
+      "prix": 11.0,
+      "categorie": "Dessert",
+      "image": "images/image7.jpg",
+      "description": "Pommes caramélisées sur pâte feuilletée, boule de glace vanille.",
+      "vegetarien": true,
+      "recherche": "apple tart"
+    },
+    {
+      "id": 8,
+      "nom": "Salade de chèvre chaud",
+      "prix": 12.5,
+      "categorie": "Entrée",
+      "image": "images/image8.jpg",
+      "description": "Toasts de chèvre gratinés, noix, miel et mesclun.",
+      "vegetarien": true,
+      "recherche": "warm goat cheese salad"
+    },
+    {
+      "id": 9,
+      "nom": "Soupe à l'oignon gratinée",
+      "prix": 11.5,
+      "categorie": "Entrée",
+      "image": "images/image9.jpg",
+      "description": "Oignons confits, bouillon de bœuf, croûtons et gruyère fondu.",
+      "recherche": "french onion soup"
+    },
+    {
+      "id": 10,
+      "nom": "Foie gras maison",
+      "prix": 19.5,
+      "categorie": "Entrée",
+      "image": "images/image10.jpg",
+      "description": "Chutney de figues et pain brioché toasté.",
+      "recherche": "foie gras"
+    },
+    {
+      "id": 11,
+      "nom": "Carpaccio de bœuf",
+      "prix": 15.5,
+      "categorie": "Entrée",
+      "image": "images/image11.jpg",
+      "description": "Fines tranches de bœuf, roquette, parmesan et huile d'olive.",
+      "recherche": "beef carpaccio"
+    },
+    {
+      "id": 12,
+      "nom": "Accras de morue",
+      "prix": 10.5,
+      "categorie": "Entrée",
+      "image": "images/image12.jpg",
+      "description": "Beignets croustillants servis avec une sauce pimentée douce.",
+      "recherche": "cod fritters"
+    },
+    {
+      "id": 13,
+      "nom": "Magret de canard au miel",
+      "prix": 27.0,
+      "categorie": "Plat",
+      "image": "images/image13.jpg",
+      "description": "Magret rosé, sauce miel et épices, gratin de légumes.",
+      "recherche": "duck breast honey sauce"
+    },
+    {
+      "id": 14,
+      "nom": "Filet de bar, beurre citronné",
+      "prix": 29.0,
+      "categorie": "Plat",
+      "image": "images/image14.jpg",
+      "description": "Bar rôti sur peau, riz sauvage et légumes de saison.",
+      "recherche": "sea bass fillet"
+    },
+    {
+      "id": 15,
+      "nom": "Entrecôte grillée, frites maison",
+      "prix": 26.5,
+      "categorie": "Plat",
+      "image": "images/image15.jpg",
+      "description": "Entrecôte de 250 g, sauce au poivre ou béarnaise.",
+      "populaire": true,
+      "recherche": "grilled steak and fries"
+    },
+    {
+      "id": 16,
+      "nom": "Poulet yassa",
+      "prix": 21.0,
+      "categorie": "Plat",
+      "image": "images/image16.jpg",
+      "description": "Poulet mariné aux oignons et au citron, riz parfumé.",
+      "recherche": "chicken yassa"
+    },
+    {
+      "id": 17,
+      "nom": "Gratin dauphinois et légumes rôtis",
+      "prix": 19.0,
+      "categorie": "Plat",
+      "image": "images/image17.jpg",
+      "description": "Pommes de terre crémeuses, carottes et courgettes rôties.",
+      "vegetarien": true,
+      "recherche": "gratin dauphinois"
+    },
+    {
+      "id": 18,
+      "nom": "Ratatouille et polenta croustillante",
+      "prix": 18.5,
+      "categorie": "Plat",
+      "image": "images/image18.jpg",
+      "description": "Légumes du soleil mijotés, polenta dorée au four.",
+      "vegetarien": true,
+      "recherche": "ratatouille polenta"
+    },
+    {
+      "id": 19,
+      "nom": "Blanquette de veau",
+      "prix": 25.0,
+      "categorie": "Plat",
+      "image": "images/image19.jpg",
+      "description": "Veau tendre, sauce crémeuse, champignons et riz pilaf.",
+      "recherche": "veal blanquette"
+    },
+    {
+      "id": 20,
+      "nom": "Crème brûlée à la vanille",
+      "prix": 9.5,
+      "categorie": "Dessert",
+      "image": "images/image20.jpg",
+      "description": "Crème onctueuse à la vanille de Madagascar, caramel craquant.",
+      "vegetarien": true,
+      "populaire": true,
+      "recherche": "creme brulee"
+    },
+    {
+      "id": 21,
+      "nom": "Profiteroles au chocolat",
+      "prix": 11.5,
+      "categorie": "Dessert",
+      "image": "images/image21.jpg",
+      "description": "Choux garnis de glace vanille, sauce chocolat chaude.",
+      "vegetarien": true,
+      "recherche": "profiteroles chocolate"
+    },
+    {
+      "id": 22,
+      "nom": "Tiramisu maison",
+      "prix": 10.5,
+      "categorie": "Dessert",
+      "image": "images/image22.jpg",
+      "description": "Biscuits imbibés de café, mascarpone et cacao.",
+      "vegetarien": true,
+      "recherche": "tiramisu"
+    },
+    {
+      "id": 23,
+      "nom": "Tarte au citron meringuée",
+      "prix": 10.0,
+      "categorie": "Dessert",
+      "image": "images/image23.jpg",
+      "description": "Crème de citron acidulée et meringue dorée.",
+      "vegetarien": true,
+      "recherche": "lemon meringue pie"
+    },
+    {
+      "id": 24,
+      "nom": "Panna cotta aux fruits rouges",
+      "prix": 9.0,
+      "categorie": "Dessert",
+      "image": "images/image24.jpg",
+      "description": "Crème italienne vanillée, coulis de framboises.",
+      "vegetarien": true,
+      "recherche": "panna cotta berries"
+    },
+    {
+      "id": 25,
+      "nom": "Salade de fruits frais",
+      "prix": 8.0,
+      "categorie": "Dessert",
+      "image": "images/image25.jpg",
+      "description": "Fruits de saison coupés à la commande, menthe fraîche.",
+      "vegetarien": true,
+      "recherche": "fresh fruit salad"
+    },
+    {
+      "id": 26,
+      "nom": "Eau minérale 50 cl",
+      "prix": 2.5,
+      "categorie": "Boisson",
+      "image": "images/image26.jpg",
+      "description": "Eau plate.",
+      "recherche": "bottle of water"
+    },
+    {
+      "id": 27,
+      "nom": "Eau gazeuse 50 cl",
+      "prix": 3.0,
+      "categorie": "Boisson",
+      "image": "images/image27.jpg",
+      "description": "Eau pétillante.",
+      "recherche": "sparkling water"
+    },
+    {
+      "id": 28,
+      "nom": "Jus d'orange pressé",
+      "prix": 4.5,
+      "categorie": "Boisson",
+      "image": "images/image28.jpg",
+      "description": "Oranges pressées à la minute.",
+      "recherche": "fresh orange juice"
+    },
+    {
+      "id": 29,
+      "nom": "Limonade maison",
+      "prix": 4.0,
+      "categorie": "Boisson",
+      "image": "images/image29.jpg",
+      "description": "Citron, sucre de canne et menthe.",
+      "recherche": "homemade lemonade"
+    },
+    {
+      "id": 30,
+      "nom": "Café espresso",
+      "prix": 2.5,
+      "categorie": "Boisson",
+      "image": "images/image30.jpg",
+      "description": "Café corsé, torréfaction artisanale.",
+      "recherche": "espresso coffee"
+    },
+    {
+      "id": 31,
+      "nom": "Thé ou infusion",
+      "prix": 3.0,
+      "categorie": "Boisson",
+      "image": "images/image31.jpg",
+      "description": "Thé vert, thé noir, menthe ou verveine.",
+      "recherche": "cup of tea"
+    },
+    {
+      "id": 32,
+      "nom": "Vin rouge, verre",
+      "prix": 6.5,
+      "categorie": "Boisson",
+      "image": "images/image32.jpg",
+      "description": "Sélection du sommelier, 15 cl.",
+      "recherche": "glass of red wine"
+    },
+    {
+      "id": 33,
+      "nom": "Bière artisanale",
+      "prix": 5.5,
+      "categorie": "Boisson",
+      "image": "images/image33.jpg",
+      "description": "Blonde ou ambrée, 33 cl.",
+      "recherche": "craft beer glass"
+    }
+  ]
+}
